@@ -25,7 +25,7 @@ class AuthTokenServiceProvider extends ServiceProvider {
                     return new AuthTokenRepository();
                 });
         $app->bind('liamqma.auth.token.hash', function () {
-                    return new HashProvider();
+                    return new HashProvider(\Config::get('app.key'));
                 });
         $app->bind('liamqma.auth.token', function () {
                     return new AuthToken($app->make('liamqma.auth.token.repo'),$app->make('liamqma.auth.token.hash'), new \Encrypter);
