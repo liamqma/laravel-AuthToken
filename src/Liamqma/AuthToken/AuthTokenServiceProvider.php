@@ -2,6 +2,7 @@
 
 namespace Liamqma\AuthToken;
 
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\ServiceProvider;
 
 class AuthTokenServiceProvider extends ServiceProvider {
@@ -27,8 +28,8 @@ class AuthTokenServiceProvider extends ServiceProvider {
         $app->bind('liamqma.auth.token.hash', function () {
                     return new HashProvider(\Config::get('app.key'));
                 });
-        $app->bind('liamqma.auth.token', function () {
-                    return new AuthToken($app->make('liamqma.auth.token.repo'),$app->make('liamqma.auth.token.hash'), new \Encrypter);
+        $app->bind('liamqma.auth.token', function ($app) {
+                    return new AuthToken($app->make('liamqma.auth.token.repo'),$app->make('liamqma.auth.token.hash'), new Encrypter(\Config::get('app.key')));
                 });
                 
                 

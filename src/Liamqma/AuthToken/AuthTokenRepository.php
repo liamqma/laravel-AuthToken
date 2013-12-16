@@ -15,9 +15,11 @@ class AuthTokenRepository {
     }
 
     public function getOrFail($userId, $publicKey, $userTable) {
-                $result = \DB::table('AuthToken')->insert(
-                array('user_id' => $userId, 'public_key'=>$publicKey, 'user_table' => $userTable) 
-        )->first();
+                $result = \DB::table('AuthToken')
+                        ->where('user_id','=',$userId)
+                        ->where('public_key','=',$publicKey)
+                        ->where('user_table','=',$userTable)
+                        ->first();
                 if($result)
                     return $result->user_id;
                 else

@@ -18,7 +18,6 @@ class AuthToken {
     }
 
     public function createToken($userId, $userTable) {
-        echo 'aaa';
         $this->setUserId($userId);
 
         # Purge
