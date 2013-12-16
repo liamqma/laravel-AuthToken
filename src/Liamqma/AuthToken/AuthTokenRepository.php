@@ -10,7 +10,7 @@ class AuthTokenRepository {
 
     public function store($userId, $userTable, $publicKey, $privateKey) {
         \DB::table('AuthToken')->insert(
-                array('user_id' => $userId, 'user_table' => $userTable, 'public_key'=>$publicKey, 'private_key'=>$privateKey)
+                array('user_id' => $userId, 'user_table' => $userTable, 'public_key'=>$publicKey, 'private_key'=>$privateKey,'created_at' => date('Y-m-d H:i:s'),'updated_at' => date('Y-m-d H:i:s') )
         );
     }
 
