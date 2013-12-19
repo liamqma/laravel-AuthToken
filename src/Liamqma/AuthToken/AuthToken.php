@@ -2,6 +2,7 @@
 
 namespace Liamqma\AuthToken;
 
+use Illuminate\Encryption\DecryptException;
 use Illuminate\Encryption\Encrypter;
 
 class AuthToken {
@@ -43,7 +44,7 @@ class AuthToken {
 
         try {
             $data = $this->encrypter->decrypt($token);
-        } catch (DecryptException $e) {
+        } catch (\DecryptException $e) {
             return false;
         }
         if (empty($data['id']) || empty($data['key']) || empty($data['table'])) {
